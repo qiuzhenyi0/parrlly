@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>運氣小遊戲</title>
+<style>
+body{
+    font-family: Arial;
+    text-align:center;
+    background:#1e1e1e;
+    color:white;
+    margin-top:80px;
+}
+button{
+    padding:10px 20px;
+    font-size:18px;
+    margin-top:10px;
+    cursor:pointer;
+}
+input{
+    padding:5px;
+    font-size:16px;
+    width:80px;
+}
+#result{
+    margin-top:20px;
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎲 運氣小遊戲</h1>
+
+<p>你的金幣：<span id="coins">100</span></p>
+
+<p>
+下注金額：
+<input type="number" id="bet" value="10" min="1">
+</p>
+
+<button onclick="play()">下注</button>
+
+<div id="result"></div>
+
+<script>
+
+let coins = 100;
+
+function play(){
+
+    let bet = parseInt(document.getElementById("bet").value);
+
+    if(bet > coins){
+        document.getElementById("result").innerText = "金幣不夠！";
+        return;
+    }
+
+    let random = Math.random();
+
+    if(random < 0.5){
+        coins -= bet;
+        document.getElementById("result").innerText = "😢 你輸了 " + bet + " 金幣";
+    }else{
+        coins += bet;
+        document.getElementById("result").innerText = "🎉 你贏了 " + bet + " 金幣";
+    }
+
+    document.getElementById("coins").innerText = coins;
+
+    if(coins <= 0){
+        document.getElementById("result").innerText = "遊戲結束，你的金幣用完了！";
+    }
+}
+
+</script>
+
+</body>
+</html>
